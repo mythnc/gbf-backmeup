@@ -1,0 +1,8 @@
+.*
+!.gitignore
+auth.ini
+*test.db
+
+*.pyc
+
+images/
