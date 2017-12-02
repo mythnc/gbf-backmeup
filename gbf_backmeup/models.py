@@ -1,3 +1,4 @@
+import csv
 from os.path import join
 import sqlite3
 from . import package_dir
@@ -8,7 +9,7 @@ conn = sqlite3.connect(join(package_dir, db_name))
 c = conn.cursor()
 c.execute('PRAGMA foreign_keys=ON')
 
-lang_id = {'en': 1, 'ja': 2}
+lang_id = {'ja': 1, 'en': 2}
 
 class Boss:
     def __init__(self):
@@ -150,8 +151,18 @@ def create_tables():
 
 def insert_predefined_data():
     c.execute("""insert into language (name) values
-                  ('en'),
-                  ('ja')""")
+                  ('ja'),
+                  ('en')""")
+    csv_file = 'boss_locale.csv'
+    with open(join(package_dir, csv_file)) as f:
+        reader = csv.DictReader(f)
+        for row in reader:
+            c.execute('''insert into boss (level) values (?)''', (row['level'],))
+            boss_id = c.lastrowid
+            c.execute('''insert into boss_locale (name, boss_id, language_id)
+                          values (?, ?, ?)''', (row['ja_name'], boss_id, 1))
+            c.execute('''insert into boss_locale (name, boss_id, language_id)
+                          values (?, ?, ?)''', (row['en_name'], boss_id, 2))
     conn.commit()
 
 
