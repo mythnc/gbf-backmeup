@@ -22,6 +22,7 @@ class Boss:
     def save(self):
         '''Save Boss data if not exists'''
         if self.is_exists():
+            self.update_image()
             return self._boss_id
 
         self.save_level()
@@ -38,6 +39,24 @@ class Boss:
         except TypeError:
             return False
         return True
+
+    def update_image(self):
+        'Update boss image if self.image is not None and boss_locale.image is null'
+        if self.image is None:
+            return
+
+        c.execute('''select id, image from boss_locale
+                     where boss_id = ? and language_id = ?''',
+                  (self._boss_id, lang_id[self.lang]))
+
+        row = c.fetchone()
+        if row[1]:
+            return
+
+        boss_locale_id = row[0]
+        c.execute('update boss_locale set image = ? where id = ?',
+                  (self.image, boss_locale_id))
+        conn.commit()
 
     def save_level(self):
         c.execute('insert into boss (level) values (?)', (self.level,))
