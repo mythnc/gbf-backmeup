@@ -9,3 +9,5 @@ crawl:
 	python -c 'from gbf_backmeup.crawler import start; start()'
 recrawl: model
 	python -c 'from gbf_backmeup.crawler import start; start()'
+wipeout:
+	python -c 'from gbf_backmeup.wipe_out import start; start()'
