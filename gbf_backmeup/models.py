@@ -76,16 +76,16 @@ class Battle:
     def __init__(self):
         self.room = ""
         self.message = ""
-        self._date = ""
+        self._timestamp = ""
         self.lang = ""
 
     @property
-    def date(self):
-        return self._date
+    def timestamp(self):
+        return self._timestamp
 
-    @date.setter
-    def date(self, date):
-        date_map = {
+    @timestamp.setter
+    def timestamp(self, timestamp):
+        month_map = {
             'Jan': 1,
             'Feb': 2,
             'Mar': 3,
@@ -99,15 +99,15 @@ class Battle:
             'Nov': 11,
             'Dec': 12,
         }
-        _, raw_month, day, time, _, year = date.split(' ')
-        month = date_map[raw_month]
-        self._date = '{}-{}-{} {}'.format(year, month, day, time)
+        _, raw_month, day, time, _, year = timestamp.split(' ')
+        month = month_map[raw_month]
+        self._timestamp = '{}-{}-{} {}'.format(year, month, day, time)
 
     def save(self, boss_id, user_id):
         # assume room is unique
-        c.execute('insert into battle (date, message, room, boss_id, user_id)'\
+        c.execute('insert into battle (timestamp, message, room, boss_id, user_id)'\
                     'values (?, ?, ?, ?, ?)',
-                  (self._date, self.message, self.room, boss_id, user_id))
+                  (self._timestamp, self.message, self.room, boss_id, user_id))
         conn.commit()
 
 
@@ -137,7 +137,7 @@ def create_tables():
                  )''')
     c.execute('''create table if not exists battle (
                   id integer primary key,
-                  date text not null,
+                  timestamp text not null,
                   message text,
                   room text not null,
                   boss_id integer,
