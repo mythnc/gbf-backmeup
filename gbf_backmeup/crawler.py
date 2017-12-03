@@ -94,7 +94,7 @@ def start():
         boss, battle = parse_text(text, lang)
         boss.image = image
         boss.lang = lang
-        battle.date = item['created_at']
+        battle.timestamp = item['created_at']
 
         user = User(lang)
         user.twitter = item['user']['screen_name']
