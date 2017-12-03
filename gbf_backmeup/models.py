@@ -29,7 +29,10 @@ class Boss:
         return self._boss_id
 
     def is_exists(self):
-        c.execute('select boss_id from boss_locale where name = ?', (self.name,))
+        c.execute('''select b.id
+                   from boss_locale b_locale
+                   inner join boss b on (b.id = b_locale.boss_id and b.level = ?)
+                   where name = ?''', (self.level, self.name))
         try:
             self._boss_id = c.fetchone()[0]
         except TypeError:
