@@ -1,5 +1,5 @@
 import logging
-from . import api
+from .constants import twitter_api as api
 
 
 logger = logging.getLogger(__name__)
@@ -38,3 +38,7 @@ def find_screen_name():
 
 def start():
     delete_backup_messages()
+
+
+if __name__ == '__main__':
+    start()

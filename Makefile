@@ -4,10 +4,10 @@ test:
 	pytest -v
 model:
 	rm -vf gbf_backmeup/gbf_backmeup_test.db
-	python -m gbf_backmeup.models
+	python -c 'from gbf_backmeup import model; model()'
 crawl:
-	python -c 'from gbf_backmeup.crawler import start; start()'
+	python -c 'from gbf_backmeup import crawl; crawl()'
 recrawl: model
-	python -c 'from gbf_backmeup.crawler import start; start()'
+	python -c 'from gbf_backmeup import crawl; crawl()'
 wipeout:
-	python -c 'from gbf_backmeup.wipe_out import start; start()'
+	python -c 'from gbf_backmeup import wipeout; wipeout()'

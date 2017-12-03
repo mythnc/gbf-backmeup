@@ -1,7 +1,7 @@
 import csv
 from os.path import join
 import sqlite3
-from . import package_dir
+from .constants import package_dir
 
 
 db_name = 'gbf_backmeup' + '_test' + '.db'
