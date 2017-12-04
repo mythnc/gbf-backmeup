@@ -6,3 +6,5 @@ auth.ini
 *.pyc
 
 images/
+
+test.py
