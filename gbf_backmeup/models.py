@@ -188,6 +188,11 @@ def insert_predefined_data():
     conn.commit()
 
 
+def delete_battles():
+    c.execute('''delete from battle''')
+    conn.commit()
+
+
 if __name__ == '__main__':
     create_tables()
     insert_predefined_data()

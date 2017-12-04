@@ -1,5 +1,6 @@
 import logging
 from .constants import twitter_api as api
+from .models import delete_battles
 
 
 logger = logging.getLogger(__name__)
@@ -38,6 +39,7 @@ def find_screen_name():
 
 def start():
     delete_backup_messages()
+    delete_battles()
 
 
 if __name__ == '__main__':
