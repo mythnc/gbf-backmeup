@@ -17,8 +17,12 @@ def model():
 
 def crawl():
     logger.info('start crawl battle data')
-    crawler.start()
-    logger.info('end crawl battle data')
+    try:
+        crawler.start()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        logger.info('end crawl battle data')
 
 
 def wipeout():

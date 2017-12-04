@@ -1,4 +1,5 @@
 import logging
+from urllib3.exceptions import ConnectTimeoutError
 from .constants import twitter_api as api
 from .models import delete_battles
 
@@ -24,8 +25,8 @@ def delete_backup_messages():
                                  {'trim_user': True})
             for data in result:
                 logger.info("%s %s", i+1, data['id'])
-        except Exception as e:
-            logger.error(e)
+        except ConnectTimeoutError:
+            logger.error('ConnectTimeoutError. Try again later.')
             return
     logger.info('end delete backup messages')
 
