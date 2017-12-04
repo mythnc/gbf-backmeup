@@ -1,6 +1,6 @@
 import logging
 from urllib3.exceptions import ConnectTimeoutError
-from .constants import twitter_api as api
+from .constants import twitter_api as api, gbf_source
 from .models import delete_battles
 
 
@@ -17,8 +17,7 @@ def delete_backup_messages():
     count = 0
     for tweet in r:
         source = tweet['source']
-        if source != ('<a href="http://granbluefantasy.jp/" '
-                      'rel="nofollow">グランブルー ファンタジー</a>'):
+        if source != gbf_source:
             continue
         count += 1
 

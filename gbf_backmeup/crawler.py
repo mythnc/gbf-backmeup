@@ -3,7 +3,7 @@ import os
 from os.path import join
 import re
 import requests
-from .constants import twitter_api as api, images_dir
+from .constants import twitter_api as api, images_dir, gbf_source
 from .models import Boss, User, Battle
 
 
@@ -71,8 +71,7 @@ def start():
                                                                    e=en_match)})
     for item in r:
         source = item['source']
-        if source != ('<a href="http://granbluefantasy.jp/" '
-                      'rel="nofollow">グランブルー ファンタジー</a>'):
+        if source != gbf_source:
             continue
 
         try:

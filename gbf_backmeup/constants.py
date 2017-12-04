@@ -20,6 +20,10 @@ token_secret = auth['token secret']
 
 twitter_api = TwitterAPI(consumer_key, consumer_secret, token, token_secret)
 
+# gbf
+gbf_source = ('<a href="http://granbluefantasy.jp/" '
+              'rel="nofollow">グランブルー ファンタジー</a>')
+
 
 if __name__ == '__main__':
     print(package_dir)
