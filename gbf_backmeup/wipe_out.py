@@ -14,20 +14,23 @@ def delete_backup_messages():
                     {'screen_name': screen_name,
                      'trim_user': True,
                      'count': 200})
-    for i, tweet in enumerate(r):
+    count = 0
+    for tweet in r:
         source = tweet['source']
         if source != ('<a href="http://granbluefantasy.jp/" '
                       'rel="nofollow">グランブルー ファンタジー</a>'):
             continue
+        count += 1
 
         try:
             result = api.request('statuses/destroy/:{}'.format(tweet['id']),
                                  {'trim_user': True})
             for data in result:
-                logger.info("%s %s", i+1, data['id'])
+                logger.info("%s %s", count, data['id'])
         except ConnectTimeoutError:
             logger.error('ConnectTimeoutError. Try again later.')
             return
+    logger.info('deleted %d tweets', count)
     logger.info('end delete backup messages')
 
 
@@ -40,7 +43,10 @@ def find_screen_name():
 
 def start():
     delete_backup_messages()
-    delete_battles()
+    logger.info('start delete battle rooms')
+    n = delete_battles()
+    logger.info('%d rooms deleted', n)
+    logger.info('end delete battle rooms')
 
 
 if __name__ == '__main__':

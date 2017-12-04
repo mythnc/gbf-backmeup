@@ -191,6 +191,7 @@ def insert_predefined_data():
 def delete_battles():
     c.execute('''delete from battle''')
     conn.commit()
+    return c.rowcount
 
 
 if __name__ == '__main__':
