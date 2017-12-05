@@ -162,7 +162,7 @@ def create_tables():
                   id integer primary key,
                   timestamp text not null,
                   message text,
-                  room text not null,
+                  room text unique on conflict replace,
                   boss_id integer,
                   user_id integer,
                   foreign key (boss_id) references boss (id),
