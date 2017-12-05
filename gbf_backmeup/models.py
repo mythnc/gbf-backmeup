@@ -194,6 +194,22 @@ def delete_battles():
     return c.rowcount
 
 
+def search_battles(boss_name='', boss_level='', timestamp="datetime('now')",
+                   since_id=0):
+    sql = '''select ba.id id, ba.room room, ba.message message,
+              ba.timestamp timestamp
+              from battle ba
+              inner join boss_locale bl on (bl.boss_id = ba.boss_id)
+              inner join boss b on (b.id = ba.boss_id)
+              where b.level = ? and bl.name = ? and timestamp >= ?  '''
+    data = (boss_level, boss_name, timestamp)
+    if since_id:
+        sql += 'and ba.id > ?'
+        data += (since_id,)
+    c.execute(sql, data)
+    return c
+
+
 if __name__ == '__main__':
     create_tables()
     insert_predefined_data()
