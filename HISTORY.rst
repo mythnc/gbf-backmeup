@@ -5,6 +5,10 @@ I follow Semantic Versioning 2.0.0 to develop this package.
 
 http://semver.org
 
+0.3.1 (2017-12-06)
+------------------
+* Adjust readme format
+
 0.3.0 (2017-12-06)
 ------------------
 **Features**
