@@ -26,7 +26,7 @@ Create table schema and predefined dataset:
 
 or
 
-.. code-block: python
+.. code-block:: python
 
     from gbf_backmeup import api
     api.model()
@@ -37,7 +37,7 @@ Crawl ``I need backup!`` related data from twitter stream API, and save them in 
 
 or
 
-.. code-block: python
+.. code-block:: python
 
     from gbf_backmeup import api
     api.crawl()
@@ -46,7 +46,7 @@ It will continuously crawl data from twitter unless interrupted manually.
 
 Find battles you want to help:
 
-.. code-block: python
+.. code-block:: python
 
     from gbf_backmeup import api
     boss_name = 'Luminiera Omega'
@@ -61,7 +61,7 @@ Wipe out your granblue fantansy related tweets and battle data in database:
 
 or
 
-.. code-block: python
+.. code-block:: python
 
     from gbf_backmeup import api
     api.wipeout()
