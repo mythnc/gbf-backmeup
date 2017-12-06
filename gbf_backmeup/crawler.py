@@ -3,17 +3,11 @@ import os
 from os.path import join
 import re
 import requests
-from TwitterAPI import TwitterAPI
-from . import consumer_key, consumer_secret, token, token_secret
-from . import images_dir
+from .constants import twitter_api as api, images_dir, gbf_source
 from .models import Boss, User, Battle
 
 
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.StreamHandler())
-
-api = TwitterAPI(consumer_key, consumer_secret, token, token_secret)
 
 
 def parse_text(text, lang):
@@ -77,8 +71,7 @@ def start():
                                                                    e=en_match)})
     for item in r:
         source = item['source']
-        if source != ('<a href="http://granbluefantasy.jp/" '
-                      'rel="nofollow">グランブルー ファンタジー</a>'):
+        if source != gbf_source:
             continue
 
         try:
@@ -103,3 +96,7 @@ def start():
         user_id = user.save()
         battle.save(boss_id, user_id)
         logger.info('data saved\n')
+
+
+if __name__ == '__main__':
+    start()

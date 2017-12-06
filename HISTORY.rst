@@ -5,6 +5,19 @@ I follow Semantic Versioning 2.0.0 to develop this package.
 
 http://semver.org
 
+0.3.0 (2017-12-06)
+------------------
+**Features**
+
+* Wipe out feature
+* Search feature (#3)
+
+**Improvements**
+
+* Reorganize module structure
+* Fix typo in boss_locale.csv
+* Update battle table schema (#2)
+
 0.2.0 (2017-12-03)
 ------------------
 * Add predefined boss locale data

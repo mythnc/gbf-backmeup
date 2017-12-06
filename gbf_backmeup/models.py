@@ -1,7 +1,7 @@
 import csv
 from os.path import join
 import sqlite3
-from . import package_dir
+from .constants import package_dir
 
 
 db_name = 'gbf_backmeup' + '_test' + '.db'
@@ -162,7 +162,7 @@ def create_tables():
                   id integer primary key,
                   timestamp text not null,
                   message text,
-                  room text not null,
+                  room text unique on conflict replace,
                   boss_id integer,
                   user_id integer,
                   foreign key (boss_id) references boss (id),
@@ -186,6 +186,28 @@ def insert_predefined_data():
             c.execute('''insert into boss_locale (name, boss_id, language_id)
                           values (?, ?, ?)''', (row['en_name'], boss_id, 2))
     conn.commit()
+
+
+def delete_battles():
+    c.execute('''delete from battle''')
+    conn.commit()
+    return c.rowcount
+
+
+def search_battles(boss_name='', boss_level='', timestamp="datetime('now')",
+                   since_id=0):
+    sql = '''select ba.id id, ba.room room, ba.message message,
+              ba.timestamp timestamp
+              from battle ba
+              inner join boss_locale bl on (bl.boss_id = ba.boss_id)
+              inner join boss b on (b.id = ba.boss_id)
+              where b.level = ? and bl.name = ? and timestamp >= ?  '''
+    data = (boss_level, boss_name, timestamp)
+    if since_id:
+        sql += 'and ba.id > ?'
+        data += (since_id,)
+    c.execute(sql, data)
+    return c
 
 
 if __name__ == '__main__':
