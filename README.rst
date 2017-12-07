@@ -28,8 +28,8 @@ or
 
 .. code-block:: python
 
-    from gbf_backmeup import api
-    api.model()
+    from gbf_backmeup import model
+    model()
 
 Crawl ``I need backup!`` related data from twitter stream API, and save them in database:
 
@@ -39,21 +39,24 @@ or
 
 .. code-block:: python
 
-    from gbf_backmeup import api
-    api.crawl()
+    from gbf_backmeup import crawl
+    crawl()
 
 It will continuously crawl data from twitter unless interrupted manually.
 
-Find battles you want to help:
+Search battles you want to help:
 
 .. code-block:: python
 
-    from gbf_backmeup import api
+    from gbf_backmeup import search_battles
     boss_name = 'Luminiera Omega'
     boss_level = 75
-    api.find(boss_name, boss_level)
+    search_battles(boss_name, boss_level)
 
-Currently, because there is no thread design, it is suggested execute ``make crawl`` and find battles simultaneously and in diffenet processes.
+Currently, because there is no thread design,
+it is suggested execute ``make crawl`` and find battles simultaneously and in diffenet processes.
+
+You could also use ``search_battles_example.py`` as an example.
 
 Wipe out your granblue fantansy related tweets and battle data in database:
 
@@ -63,5 +66,5 @@ or
 
 .. code-block:: python
 
-    from gbf_backmeup import api
-    api.wipeout()
+    from gbf_backmeup import wipeout
+    wipeout()
