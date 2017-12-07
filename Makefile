@@ -3,7 +3,7 @@ lint: test
 test:
 	pytest -v
 model:
-	rm -vf gbf_backmeup/gbf_backmeup_test.db
+	rm -vf gbf_backmeup/gbf.db
 	python -c 'from gbf_backmeup import model; model()'
 crawl:
 	python -c 'from gbf_backmeup import crawl; crawl()'

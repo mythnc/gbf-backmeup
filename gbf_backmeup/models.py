@@ -5,7 +5,7 @@ import sqlite3
 from .constants import package_dir
 
 
-db_name = 'gbf_backmeup' + '_test' + '.db'
+db_name = 'gbf.db'
 conn = sqlite3.connect(join(package_dir, db_name))
 c = conn.cursor()
 c.execute('PRAGMA foreign_keys=ON')
