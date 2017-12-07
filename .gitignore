@@ -1,7 +1,7 @@
 .*
 !.gitignore
 auth.ini
-*test.db
+*.db
 
 *.pyc
 
