@@ -1,3 +1,4 @@
+import datetime
 import csv
 from os.path import join
 import sqlite3
@@ -194,8 +195,12 @@ def delete_battles():
     return c.rowcount
 
 
-def search_battles(boss_name='', boss_level='', timestamp="datetime('now')",
-                   since_id=0):
+def search_battles(boss_name, boss_level, timestamp=None, since_id=0):
+    """Search related battles and return a list"""
+
+    if timestamp is None:
+        timestamp = datetime.datetime.utcnow() - datetime.timedelta(minutes=5)
+
     sql = '''select ba.id id, ba.room room, ba.message message,
               ba.timestamp timestamp
               from battle ba
@@ -206,8 +211,9 @@ def search_battles(boss_name='', boss_level='', timestamp="datetime('now')",
     if since_id:
         sql += 'and ba.id > ?'
         data += (since_id,)
+
     c.execute(sql, data)
-    return c
+    return c.fetchall()
 
 
 if __name__ == '__main__':
