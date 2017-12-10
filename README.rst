@@ -1,7 +1,9 @@
 Granblue Fantasy - Back Me Up
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Crawl and save ``I need backup!`` related data from Twitter stream API.
+Crawl and search ``I need backup!`` related data from Twitter stream API.
+
+`Demo video <https://www.youtube.com/watch?v=5Q9YjzNT3nc>`_
 
 Prerequisite
 ------------
